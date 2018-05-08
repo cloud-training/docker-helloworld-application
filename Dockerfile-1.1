@@ -1,13 +1,10 @@
 FROM php:7.0-apache
 
-WORKDIR /etc/apache2/mods-enabled
-
-RUN ln -s ../mods-available/rewrite.load rewrite.load
-
 COPY HelloWorld/ /var/www/html/
 
-WORKDIR /
-
+RUN mkdir -p /mnt/images
+RUN chown www-data: /mnt/images
 RUN sed -i 's/KeepAlive On/KeepAlive Off/g' /etc/apache2/apache2.conf
+RUN ln -s /etc/apache2/mods-available/rewrite.load /etc/apache2/mods-enabled/rewrite.load
 
 EXPOSE 80/tcp
