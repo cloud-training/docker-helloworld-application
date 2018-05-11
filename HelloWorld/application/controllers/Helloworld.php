@@ -25,6 +25,7 @@ class Helloworld extends CI_Controller {
 			}
 		}
 
+		$this->output->set_header('X-Forwarded-To: ' . gethostname());
 		$this->load->view('index', $data);
 	}
 
